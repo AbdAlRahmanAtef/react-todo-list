@@ -117,9 +117,9 @@ function App() {
                 if (inputValue !== "") {
                   if (mood === "add") {
                     addTodo({
+                      completed: false,
                       id: new Date().getTime().toString(),
                       title: inputValue,
-                      completed: false,
                     });
                   } else {
                     // updateTodo(theId, inputValue);
@@ -137,15 +137,15 @@ function App() {
         </div>
       </div>
       <div className="todos-container">
-        {/* {todos?.map((todo) => (
+        {todos?.map((todo) => (
           <Todo
             todo={todo}
             key={todo.id}
-            handleComplete={handleComplete}
-            removeTodo={removeTodo}
-            handleInputValue={handleInputValue}
+            // handleComplete={handleComplete}
+            // removeTodo={removeTodo}
+            // handleInputValue={handleInputValue}
           />
-        ))} */}
+        ))}
       </div>
       <div className="count">
         {/* Todos: {todos.length} & completed: {todoscount} */}
