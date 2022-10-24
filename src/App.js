@@ -3,24 +3,24 @@ import { IoMdAdd } from "react-icons/io";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 function App() {
-  // const saveJSON = (items) =>
-  //   localStorage.setItem("TODO_ITEMS", JSON.stringify(items));
-  // const initial = JSON.parse(localStorage.getItem("TODO_ITEMS"));
-  // const [mood, setMood] = useState("add");
-  // const [theId, settheId] = useState("");
-  // const inputRef = useRef();
-  // const [inputValue, setInputValue] = useState("");
-  // const [todos, setTodos] = useState(initial);
+  const saveJSON = (items) =>
+    localStorage.setItem("TODO_ITEMS", JSON.stringify(items));
+  const initial = JSON.parse(localStorage.getItem("TODO_ITEMS"));
+  const [mood, setMood] = useState("add");
+  const [theId, settheId] = useState("");
+  const inputRef = useRef();
+  const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState(initial);
 
-  // const addTodo = (todo) => {
-  //   if (todo.title !== "" && mood === "add") {
-  //     setTodos([...todos, todo]);
-  //   }
-  //   saveJSON([...todos, todo]);
-  //   toast(`${todo.title}: added successfully`, {
-  //     type: "success",
-  //   });
-  // };
+  const addTodo = (todo) => {
+    if (todo.title !== "" && mood === "add") {
+      setTodos([...todos, todo]);
+    }
+    saveJSON([...todos, todo]);
+    toast(`${todo.title}: added successfully`, {
+      type: "success",
+    });
+  };
 
   // const removeTodo = (id) => {
   //   const todo = todos.find((item) => item.id === id);
@@ -107,29 +107,29 @@ function App() {
             <input
               type="text"
               placeholder="Add Task"
-              // onChange={(e) => {
-              //   setInputValue(e.target.value);
-              // }}
-              // ref={inputRef}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+              ref={inputRef}
             />
             <button
-            // onClick={() => {
-            //   if (inputValue !== "") {
-            //     if (mood === "add") {
-            //       addTodo({
-            //         ...todo,
-            //         id: new Date().getTime().toString(),
-            //         title: inputValue,
-            //       });
-            //     } else {
-            //       updateTodo(theId, inputValue);
-            //     }
-            //   }
-            //   inputRef.current.value = "";
-            //   setInputValue("");
-            //   inputRef.current.focus();
-            //   setMood("add");
-            // }}
+              onClick={() => {
+                if (inputValue !== "") {
+                  if (mood === "add") {
+                    addTodo({
+                      id: new Date().getTime().toString(),
+                      title: inputValue,
+                      completed: false,
+                    });
+                  } else {
+                    // updateTodo(theId, inputValue);
+                  }
+                }
+                inputRef.current.value = "";
+                setInputValue("");
+                inputRef.current.focus();
+                setMood("add");
+              }}
             >
               <IoMdAdd size={30} />
             </button>
