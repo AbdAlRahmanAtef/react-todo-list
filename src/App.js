@@ -10,7 +10,7 @@ function App() {
   const [theId, settheId] = useState("");
   const inputRef = useRef();
   const [inputValue, setInputValue] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(initial);
 
   const addTodo = (todo) => {
     if (todo.title !== "" && mood === "add") {
@@ -22,81 +22,81 @@ function App() {
     });
   };
 
-  // const removeTodo = (id) => {
-  //   const todo = todos.find((item) => item.id === id);
-  //   setTodos(todos.filter((todo) => todo.id !== id));
-  //   saveJSON(todos.filter((todo) => todo.id !== id));
-  //   toast(`${todo.title}: deleted `, {
-  //     type: toast.TYPE.ERROR,
-  //   });
-  // };
+  const removeTodo = (id) => {
+    const todo = todos.find((item) => item.id === id);
+    setTodos(todos.filter((todo) => todo.id !== id));
+    saveJSON(todos.filter((todo) => todo.id !== id));
+    toast(`${todo.title}: deleted `, {
+      type: toast.TYPE.ERROR,
+    });
+  };
 
-  // const handleComplete = (id) => {
-  //   const todo = todos.find((todo) => todo.id === id);
-  //   const newTodos = todos.map((item) => {
-  //     if (item.id === id) {
-  //       return { ...item, completed: !item.completed };
-  //     }
-  //     return item;
-  //   });
-  //   setTodos(newTodos);
-  //   saveJSON(newTodos);
-  //   if (todo.completed === true) {
-  //     toast(`${todo.title}: is not completed`, {
-  //       type: "info",
-  //     });
-  //   } else {
-  //     toast(`${todo.title}: completed successfully`, {
-  //       type: "success",
-  //     });
-  //   }
-  // };
+  const handleComplete = (id) => {
+    const todo = todos.find((todo) => todo.id === id);
+    const newTodos = todos.map((item) => {
+      if (item.id === id) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setTodos(newTodos);
+    saveJSON(newTodos);
+    if (todo.completed === true) {
+      toast(`${todo.title}: is not completed`, {
+        type: "info",
+      });
+    } else {
+      toast(`${todo.title}: completed successfully`, {
+        type: "success",
+      });
+    }
+  };
 
-  // const handleInputValue = (id) => {
-  //   setMood("update");
-  //   settheId(id);
-  //   const index = todos.findIndex((item) => item.id === id);
-  //   inputRef.current.value = todos[index].title;
-  //   setInputValue(inputRef.current.value);
-  //   inputRef.current.focus();
-  // };
+  const handleInputValue = (id) => {
+    setMood("update");
+    settheId(id);
+    const index = todos.findIndex((item) => item.id === id);
+    inputRef.current.value = todos[index].title;
+    setInputValue(inputRef.current.value);
+    inputRef.current.focus();
+  };
 
-  // const updateTodo = (id, title) => {
-  //   const todoIndex = todos.findIndex((todo) => todo.id === id);
-  //   todos[todoIndex].title = title;
-  //   saveJSON(todos);
-  //   toast(`${todos[todoIndex].title}: updated successfully`, {
-  //     type: "info",
-  //   });
-  // };
+  const updateTodo = (id, title) => {
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    todos[todoIndex].title = title;
+    saveJSON(todos);
+    toast(`${todos[todoIndex].title}: updated successfully`, {
+      type: "info",
+    });
+  };
 
-  // const todoscount =
-  //   todos.length &&
-  //   todos
-  //     .map((todo) => {
-  //       return todo.completed === true ? 1 : 0;
-  //     })
-  //     ?.reduce((acc, current) => acc + current);
+  const todoscount =
+    todos.length &&
+    todos
+      .map((todo) => {
+        return todo.completed === true ? 1 : 0;
+      })
+      ?.reduce((acc, current) => acc + current);
 
-  // window.onkeyup = (e) => {
-  //   if (e.key === "Enter") {
-  //     if (inputValue !== "") {
-  //       if (mood === "add") {
-  //         addTodo({
-  //           ...todo,
-  //           id: new Date().getTime().toString(),
-  //           title: inputValue,
-  //         });
-  //       } else {
-  //         updateTodo(theId, inputValue);
-  //       }
-  //       inputRef.current.value = "";
-  //       setInputValue("");
-  //       inputRef.current.focus();
-  //       setMood("add");
-  //     }
-  //   }
-  // };
+  window.onkeyup = (e) => {
+    if (e.key === "Enter") {
+      if (inputValue !== "") {
+        if (mood === "add") {
+          addTodo({
+            id: new Date().getTime().toString(),
+            title: inputValue,
+            completed: false,
+          });
+        } else {
+          updateTodo(theId, inputValue);
+        }
+        inputRef.current.value = "";
+        setInputValue("");
+        inputRef.current.focus();
+        setMood("add");
+      }
+    }
+  };
 
   return (
     <div className={`app`}>
@@ -117,12 +117,12 @@ function App() {
                 if (inputValue !== "") {
                   if (mood === "add") {
                     addTodo({
-                      completed: false,
                       id: new Date().getTime().toString(),
                       title: inputValue,
+                      completed: false,
                     });
                   } else {
-                    // updateTodo(theId, inputValue);
+                    updateTodo(theId, inputValue);
                   }
                 }
                 inputRef.current.value = "";
@@ -141,14 +141,14 @@ function App() {
           <Todo
             todo={todo}
             key={todo.id}
-            // handleComplete={handleComplete}
-            // removeTodo={removeTodo}
-            // handleInputValue={handleInputValue}
+            handleComplete={handleComplete}
+            removeTodo={removeTodo}
+            handleInputValue={handleInputValue}
           />
         ))}
       </div>
       <div className="count">
-        Todos: {todos?.length} & completed: {}
+        Todos: {todos.length} & completed: {todoscount}
       </div>
     </div>
   );
