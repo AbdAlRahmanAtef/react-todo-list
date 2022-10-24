@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { GoCheck } from "react-icons/go";
+import { Context } from "../context/appContext";
 
-const Todo = ({
-  todo: { title, id, completed },
-  handleComplete,
-  removeTodo,
-  handleInputValue,
-}) => {
+const Todo = ({ todo: { title, id, completed } }) => {
+  const { handleComplete, removeTodo, handleInputValue } = useContext(Context);
   return (
     <div className={`todo ${completed && "done"}`}>
       <p>{title}</p>
