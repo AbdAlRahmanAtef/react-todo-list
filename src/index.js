@@ -4,11 +4,11 @@ import App from "./App";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "./styles/index.scss";
+import { TodoProvider } from "./context/appContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
+  <TodoProvider>
     <ToastContainer
       className="toast"
       position="bottom-right"
@@ -19,5 +19,6 @@ root.render(
       pauseOnHover
       theme="dark"
     />
-  </React.StrictMode>
+    <App />
+  </TodoProvider>
 );
