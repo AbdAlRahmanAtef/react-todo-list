@@ -10,7 +10,7 @@ function App() {
   const [theId, settheId] = useState("");
   const inputRef = useRef();
   const [inputValue, setInputValue] = useState("");
-  const [todos, setTodos] = useState(initial);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
     if (todo.title !== "" && mood === "add") {
@@ -148,7 +148,7 @@ function App() {
         ))}
       </div>
       <div className="count">
-        {/* Todos: {todos.length} & completed: {todoscount} */}
+        Todos: {todos?.length} & completed: {}
       </div>
     </div>
   );
