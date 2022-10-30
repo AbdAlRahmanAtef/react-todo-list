@@ -14,7 +14,7 @@ export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState(initial);
 
   const addTodo = (todo) => {
-    if (todo.title !== "" && mood === "add") {
+    if (todo.title !== " " && mood === "add") {
       setTodos([...todos, todo]);
     }
     saveJSON([...todos, todo]);

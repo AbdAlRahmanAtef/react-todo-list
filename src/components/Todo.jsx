@@ -19,13 +19,13 @@ const Todo = ({ todo: { title, id, completed } }) => {
         >
           <GoCheck size={20} className={`${completed && "done"}`} />
         </div>
-        <BsPencilSquare
+        <BsPencilSquare title="Edit Todo"
           size={20}
           onClick={() => {
             handleInputValue(id);
           }}
         />
-        <FaRegTrashAlt size={20} onClick={() => removeTodo(id)} />
+        <FaRegTrashAlt title="Remove Todo" size={20} onClick={() => removeTodo(id)} />
       </div>
     </div>
   );
